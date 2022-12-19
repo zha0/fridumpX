@@ -81,4 +81,5 @@ Any suggestions and comments are welcome!
 ```
 Bypass JB/Root with frida scripts
 Code Refactory
+https://blog.csdn.net/freeking101/article/details/107438271
 ```
