@@ -1,0 +1,25 @@
+aws_access_key: (A3T[A-Z0-9]|AKIA|ACCA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA|ASCA|APKA)[A-Z0-9]{16}
+# bug aws_secret_ke: (?i)aws(.{0,20})?(?-i)['\"][0-9a-zA-Z\/+]{40}['\"]
+aws_mws: amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+aws_sns: arn:aws:sns:[a-z0-9\-]+:[0-9]+:[A-Za-z0-9\-_]+
+# bug facebook_secret_key: (?i)(facebook|fb)(.{0,20})?(?-i)['\"][0-9a-f]{32}['\"]
+github_personal_acess_token: ghp_.{36}
+github_oauth_token: gho_.{36}
+github_app_token: (ghu|ghs)_.{36}
+github_refresh_token: ghr_.{76}
+assimetric_key_private: -----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----
+google_api_key: AIza[0-9A-Za-z\-_]{35}
+gcp_service_account: 'type": "service_account'
+heroku_api_key: (?i)heroku(.{0,20})?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
+mailchimp: '[0-9a-f]{32}-us[0-9]{1,2}'
+mailgun: key\-[0-9a-zA-Z]{32}
+paypal_brain_tree: access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}
+picatic_api_key: sk\_live\_[0-9a-z]{32}
+send_grid_api_key: SG\.[a-zA-Z0-9]{22}\.[a-zA-Z0-9]{43}
+slack_webhook: https://hooks.slack.com/services/T[0-9A-Za-z\-_]{8}/B[0-9A-Za-z\-_]{8}/[0-9A-Za-z\-_]{24}
+stripe_api_key: (?i)stripe(.{0,20})?[sr]k_live_[0-9a-zA-Z]{24}
+square_access_token: sq0atp\-[0-9A-Za-z\-_]{22}|EAAAE[a-zA-Z0-9\-_]{59}
+square_oauth_secret: sq0csp\-[0-9A-Za-z\-_]{43}
+# bug aws_cognito_pool: us-east-1|us-east-2|us-west-1|us-west-2|sa-east-1):[0-9A-Za-z]{8}-[0-9A-Za-z]{4}
+httpS_url: https?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+
+HTTP_URL: http?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+
