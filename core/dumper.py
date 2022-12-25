@@ -19,7 +19,8 @@ def dump_to_file(agent,base,size,error,directory):
 #Read bytes that are bigger than the max_size value, split them into chunks and save them to a file
 
 def splitter(agent,base,size,max_size,error,directory):
-        times = size//max_size
+        #times = size//max_size
+        times = int(size/max_size) #fix where times is not a number
         diff = size % max_size
         if diff is 0:
             logging.debug("Number of chunks:"+str(times+1))

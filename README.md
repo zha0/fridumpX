@@ -1,14 +1,29 @@
-# fridawizz
-fridawizz (v0.1) is an open source memory dumping tool, primarily aimed to penetration testers and developers. fridawizz is using the Frida framework to dump accessible memory addresses from any platform supported. It can be used from a Windows, Linux or Mac OS X system to dump the memory of an iOS, Android or Windows application.
+# fridumpX
+fridumpX (v0.1) is an open source memory dumping tool, primarily aimed to penetration testers and developers. fridumpX is using the Frida framework to dump accessible memory addresses from any platform supported. It can be used from a Windows, Linux or Mac OS X system to dump the memory of an iOS, Android or Windows application. **FridumpX** are inspired by fridump 
+https://github.com/Nightbringer21/fridump thanks to @Nightbringer
+
+
+* Tested with:
+      - Frida 16.0.8
+      - iOS jailbreaked devices with: 
+            - https://checkra.in
+            - https://github.com/palera1n
+            - Note, for iphone X > 14.9 use Xina jailbreak
+
+---
+
+
+![fridumpX.png](fridumpX.png)
+
 
 Usage
 ---
 
 How to:
 
-      fridawizz [-h] [-o dir] [-U] [-v] [-r] [-s] [--max-size bytes] process
+      fridumpX [-h] [-o dir] [-U] [-v] [-r] [-s] [--max-size bytes] process
 
-The following are the main flags that can be used with fridawizz:
+The following are the main flags that can be used with fridumpX:
 
       positional arguments:
       process            the process that you will be injecting to
@@ -32,26 +47,28 @@ For a process that is running on a USB connected device, you can use:
 
 Examples:
 
-      fridawizz -U Safari   -   Dump the memory of an iOS device associated with the Safari app
-      fridawizz -U -s com.example.WebApp   -  Dump the memory of an Android device and run strings on all dump files
-      fridawizz -r -o [full_path]  -  Dump the memory of a local application and save it to the specified directory
+      fridumpX -U Safari   -   Dump the memory of an iOS device associated with the Safari app
+      fridumpX -U -s com.example.WebApp   -  Dump the memory of an Android device and run strings on all dump files
+      fridumpX -r -o [full_path]  -  Dump the memory of a local application and save it to the specified directory
       
-More examples can be found [here](http://pentestcorner.com/introduction-to-fridawizz/)
-
 Installation
 ---
-To install fridawizz you just need to clone it from git and run it:
+To install fridumpX you just need to clone it from git and run it:
 
-      git clone https://github.com/Nightbringer21/fridawizz.git
+      git clone https://github.com/Nightbringer21/fridumpX.git
             
-      python fridawizz.py -h
+      python3 fridumpX.py -h
             
 Pre-requisites
 ---
-To use fridawizz you need to have frida installed on your python environment and frida-server on the device you are trying to dump the memory from.
+To use fridumpX you need to have frida installed on your python environment and frida-server on the device you are trying to dump the memory from.
 The easiest way to install frida on your python is using pip:
 
-    pip install frida
+```
+
+python3 -m install frida frida-tools
+
+```
     
 More information on how to install Frida can be found [here](http://www.frida.re/docs/installation/)
 
@@ -60,18 +77,6 @@ For iOS, installation instructions can be found [here](http://www.frida.re/docs/
 For Android, installation instructions can be found [here](http://www.frida.re/docs/android/).
 
 Note: On Android devices, make sure that the frida-server binary is running as root!
-
-Disclaimer
----
-* This is version 0.1 of the software, so I expect some bugs to be present
-* I am not a developer, so my coding skills might not be the best
-
-This tool has been tested on a Windows 7 and a Mac OS X laptop, dumping the memory of:  
-* an iPad Air 2 running iOS 8.2
-* a Galaxy Tab running Cyanogenmod 4.4.4
-* a Windows 7 laptop.
- 
-Therefore, if this tool is not working for you, I apologise and I will try to fix it.
 
 Any suggestions and comments are welcome!
 
