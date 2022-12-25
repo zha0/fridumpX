@@ -1,7 +1,7 @@
 
 
-def logo():
-    bannner = """
+def logo(version):
+    bannner = f"""
 
 
 Author: @unp4ck
@@ -12,6 +12,7 @@ Author: @unp4ck
 ██      ██   ██ ██ ██████   ██████  ██      ██ ██      ██   ██ 
                                                                
 Powered by: @fridadotre
+Version: {version}
                                                             
 """
     return bannner

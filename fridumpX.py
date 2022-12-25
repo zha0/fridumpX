@@ -10,7 +10,8 @@ import time
 from utils import misc, Utils
 
 
-
+__author__ = "@unp4ck"
+__version__ = "v1.1"
 
 # Main Menu
 def MENU():
@@ -42,7 +43,7 @@ def MENU():
 
 
 arguments = MENU()
-print(misc.logo())
+print(misc.logo(__version__))
 
 # Define Configurations
 APP_NAME = arguments.process

@@ -1,5 +1,5 @@
 # fridumpX
-fridumpX (v0.1) is an open source memory dumping tool and using regex patterns (verify regex.yaml) to grep sensitive information based on theses regex, primarily aimed to penetration testers and developers. fridumpX is using the Frida framework to dump accessible memory addresses from any platform supported. It can be used from a Windows, Linux or Mac OS X system to dump the memory of an iOS, Android or Windows application. **FridumpX** are inspired by fridump 
+fridumpX (v0.1) is an open source memory dumping tool and using regex patterns (verify regex.yaml) to grep sensitive information based on these regexs, primarily aimed to penetration testers and developers to verify memory information that contains some internal urls, tokens and anything based on regex patterns. fridumpX is using the Frida framework to dump accessible memory addresses from any platform supported. It can be used from a Windows, Linux or Mac OS X system to dump the memory of an iOS, Android or Windows application. **FridumpX** are inspired by fridump 
 https://github.com/Nightbringer21/fridump thanks to @Nightbringer
 
 
