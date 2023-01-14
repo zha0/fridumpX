@@ -16,12 +16,14 @@ __version__ = "v1.1"
 # Main Menu
 def MENU():
     parser = argparse.ArgumentParser(
-        prog='fridawizz',
+        prog='fridumpX',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description=textwrap.dedent(""))
 
     parser.add_argument('process',
                         help='the process that you will be injecting to')
+    parser.add_argument('-re', '--regex', action='store_true', help='use regex to grep juicy info, use the -reo option to save the findings')
+    parser.add_argument('-reo', '--regexout', type=str, metavar="dir", help="dir name after regex findings (def: fridumpx_out")
     parser.add_argument('-o', '--out', type=str, metavar="dir",
                         help='provide full output directory path. (def: \'dump\')')
     parser.add_argument('-U', '--usb', action='store_true',
@@ -55,6 +57,9 @@ MAX_SIZE = 20971520 # max integer value python
 PERMS = 'rw-'
 DEVICE = arguments.device
 HOST = arguments.host # TODO
+REGEX = arguments.regex
+REGEX_DIR = arguments.regexout
+REGEX_DIR_NAME = ""
 
 if arguments.read_only:
     PERMS = 'r--'
@@ -164,15 +169,31 @@ if STRINGS:
     files = os.listdir(DIRECTORY)
     i = 0
     l = len(files)
-    print("Running strings on all files:")
+    print("[*] Running strings on all files:")
     for f1 in files:
         Utils.strings(f1, DIRECTORY)
         i += 1
         Utils.printProgress(i, l, prefix='Progress:', suffix='Complete', bar=50)
-    aws = input("[*] Would you like to find juicy information wih regex patterns: (Y/n)")
-    if aws.lower()[0] == 'y':
-        Utils.inspec(DIRECTORY)
+    if REGEX:
+        if REGEX_DIR is not None:
+            REGEX_DIR_NAME = REGEX_DIR
+            if not os.path.exists(REGEX_DIR_NAME):
+                os.makedirs(REGEX_DIR_NAME)
+        if os.path.isdir(REGEX_DIR_NAME):
+            print("[*] Output regexs finding directory is set to: " + REGEX_DIR_NAME)
+            print(f"[*] dumping contents of {DIRECTORY}")
+            Utils.inspec(DIRECTORY, REGEX_DIR_NAME)
+        else:
+            print("[!] The selected output directory does not exist!")
+            sys.exit(1)
     else:
-        print("[*] Thanks for using this tool! <3")
-        print("Finished!")
-        sys.exit(0)
+        print("[*] Current Directory: " + str(os.getcwd()))
+        REGEX_DIR_NAME = os.path.join(os.getcwd(), "fridumpx_out")
+        print("[*] Output directory is set to: " + REGEX_DIR_NAME)
+        print(f"[*] dumping contents of {DIRECTORY}")
+        Utils.inspec(DIRECTORY, REGEX_DIR_NAME)
+    if not os.path.exists(REGEX_DIR_NAME):
+        print("[*] Creating directory...")
+        os.makedirs(REGEX_DIR_NAME)
+        print(f"[*] dumping contents of {DIRECTORY}")
+        Utils.inspec(DIRECTORY, REGEX_DIR_NAME)
