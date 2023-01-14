@@ -1,5 +1,7 @@
 import os
 import logging
+import sys
+import hashlib
 
 # Reading bytes from session and saving it to a file
 
@@ -13,8 +15,34 @@ def dump_to_file(agent,base,size,error,directory):
                 return error
         except Exception as e:
             logging.debug("[!]"+str(e))
-            print("Oops, memory access violation!")
+            print("[*] memory access violation!")
             return error
+
+def regex_dump_file(directory, finding):
+    try:
+        with open(os.path.join(directory,'regex_findings.txt'), 'a') as f:
+            write_line = finding + '\n'
+            f.writelines(write_line)
+    except Exception as e:
+        logging.debug(f"[!] {e}")
+        print(f"[!] error while saving regex findings {e}")
+        sys.exit(1)
+    
+
+    ## remove duplicates
+    input_file_path = os.path.join(directory,'regex_findings.txt')
+    out_file_path = os.path.join(directory,'regex_findings_uniq.txt')
+
+    complete_line_hash = set()
+    out_file = open(out_file_path, "w")
+    for line in open(input_file_path, "r"):
+        hash_value = hashlib.md5(line.rstrip().encode('utf-8')).hexdigest()
+        if hash_value not in complete_line_hash:
+            out_file.write(line+'\n')
+            complete_line_hash.add(hash_value)
+    out_file.close()
+
+
 
 #Read bytes that are bigger than the max_size value, split them into chunks and save them to a file
 
