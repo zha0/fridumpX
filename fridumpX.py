@@ -187,13 +187,6 @@ if STRINGS:
             print("[!] The selected output directory does not exist!")
             sys.exit(1)
     else:
-        print("[*] Current Directory: " + str(os.getcwd()))
-        REGEX_DIR_NAME = os.path.join(os.getcwd(), "fridumpx_out")
-        print("[*] Output directory is set to: " + REGEX_DIR_NAME)
-        print(f"[*] dumping contents of {DIRECTORY}")
-        Utils.inspec(DIRECTORY, REGEX_DIR_NAME)
-    if not os.path.exists(REGEX_DIR_NAME):
-        print("[*] Creating directory...")
-        os.makedirs(REGEX_DIR_NAME)
-        print(f"[*] dumping contents of {DIRECTORY}")
-        Utils.inspec(DIRECTORY, REGEX_DIR_NAME)
+        print("[*] Thanks for using this tool! <3")
+        print("Finished!")
+        sys.exit(0)
