@@ -5,13 +5,14 @@ import os
 import re
 from io import open
 import yaml
+from core import dumper
 
 
 def read_yaml(file_path):
     with open(file_path, "r") as f:
         return yaml.safe_load(f)
 
-def inspec(directory):
+def inspec(directory, regex_dir_name):
     # Use os.listdir() to get a list of all the files in the directory
     files = os.listdir(directory)
     # Iterate over the list of files and read each one
@@ -19,7 +20,7 @@ def inspec(directory):
         if os.path.isdir(file):
             pass
         with open(os.path.join(directory, file), 'r', encoding='iso8859-1') as f:
-            print(f"[*] reading file: {file}")
+            # print(f"[*] reading file: {file}") uncoment if you want to debug :}
             content = f.read()
             #print(content)
             # open regex file
@@ -30,6 +31,7 @@ def inspec(directory):
                 if check:
                     for findings in set(check):
                         print(f"[*] FOUND pattern: [{key}]:     [{findings}]")
+                        dumper.regex_dump_file(regex_dir_name, findings)
 
 
 # Progress bar function
