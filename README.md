@@ -83,8 +83,11 @@ Examples:
 
 * Mobile app target, dump the memory and run strings on all dump files (xxxxx.data):
 
-```
+```bash
 python3 fridumpX.py -U com.app.name -s
+
+# verify at dump folder, you can cat all .data files
+$ cat *.data | grep -i "<your_pattern>" 
 ```
 
 * Any target, Dump the memory of a local application and save it to the specified directory
