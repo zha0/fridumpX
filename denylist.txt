@@ -1,0 +1,6 @@
+www.w3.org
+www.apple.com
+vega.github.io
+developer.apple.com
+docs.microsoft.com
+microsoft.com

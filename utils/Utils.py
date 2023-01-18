@@ -6,13 +6,14 @@ import re
 from io import open
 import yaml
 from core import dumper
+from urllib.parse import urlparse
 
 
 def read_yaml(file_path):
     with open(file_path, "r") as f:
         return yaml.safe_load(f)
 
-def inspec(directory, regex_dir_name):
+def inspec(directory, regex_dir_name, denyListCustom="", DENY_ON=False):
     # Use os.listdir() to get a list of all the files in the directory
     files = os.listdir(directory)
     # Iterate over the list of files and read each one
@@ -30,8 +31,40 @@ def inspec(directory, regex_dir_name):
                 check = regex_obj.findall(content)
                 if check:
                     for findings in set(check):
-                        print(f"[*] FOUND pattern: [{key}]:     [{findings}]")
-                        dumper.regex_dump_file(regex_dir_name, findings)
+                        if DENY_ON:
+                            if key == "HTTP" or key == "HTTPS":
+                                if denyURL(findings):
+                                    continue
+                                else:
+                                    print(f"[*] FOUND pattern: [{key}]:     {findings}")
+                                    dumper.regex_dump_file(regex_dir_name, findings)
+                        if DENY_ON and denyListCustom != "":
+                            if denyListCustom != "" or denyListCustom != None:
+                                if denyListLogic(findings, denyListCustom):
+                                    continue
+                                else:
+                                    print(f"[*] FOUND pattern: [{key}]:     {findings}")
+                                    dumper.regex_dump_file(regex_dir_name, findings)
+                            else:
+                                print(f"[*] FOUND pattern: [{key}]:     {findings}")
+                                dumper.regex_dump_file(regex_dir_name, findings)
+
+
+
+def denyURL(url):
+    with open('denylist.txt') as denyListTXT:
+       lines = [line.rstrip() for line in denyListTXT]
+       for line in lines:
+            parseURL = urlparse(url)
+            if parseURL.hostname == line:
+                # print(f"{parseURL.hostname} == {line} || {parseURL.hostname == line}")
+                return True
+
+def denyListLogic(stringFound, denyListCustom=""):
+    if denyListCustom != "" or denyListCustom != None:
+        for s in denyListCustom.split(","):
+            if s in stringFound:
+                return True
 
 
 # Progress bar function
@@ -62,4 +95,4 @@ def strings(filename, directory, min=4):
 
 
 def on_message(message, data):
-   print("[on_message] message:", message, "data:", data)
+   print("[*] [on_message] message:", message, "data:", data)

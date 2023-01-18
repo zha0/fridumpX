@@ -18,7 +18,7 @@ def MENU():
     parser = argparse.ArgumentParser(
         prog='fridumpX',
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        description=textwrap.dedent(""))
+        description=textwrap.dedent(misc.logo(__version__)))
 
     parser.add_argument('process',
                         help='the process that you will be injecting to')
@@ -39,7 +39,9 @@ def MENU():
     parser.add_argument('-D', '--device', type=str, metavar='id',
                         help='connect to device with the given id')
     parser.add_argument('-H', '--host', type=str, metavar="host", 
-                        help='remote device connected over tcp') 
+                        help='remote device connected over tcp')
+    parser.add_argument('-dnl', '--denylist', help="common patterns to deny while using the regex feature", action='store_true')
+    parser.add_argument('-cdnl', '--customdenylist', help='custom deny list with comma separated values ex: foo,bar,john,doe', type=str)
     args = parser.parse_args()
     return args
 
@@ -60,6 +62,8 @@ HOST = arguments.host # TODO
 REGEX = arguments.regex
 REGEX_DIR = arguments.regexout
 REGEX_DIR_NAME = ""
+DENY_LIST_CUSTOM = arguments.customdenylist
+DENY_ON = arguments.denylist
 
 if arguments.read_only:
     PERMS = 'r--'
@@ -165,11 +169,16 @@ print("")
 
 # Run Strings if selected
 
+if REGEX and not STRINGS:
+    print("[!] you need to insert -s\n python3 fridumpx.py -s com.foo.bar -reo foo.bar -re")
+    print("[*] exiting..")
+    
+
 if STRINGS:
     files = os.listdir(DIRECTORY)
     i = 0
     l = len(files)
-    print("[*] Running strings on all files:")
+    print("[*] Running strings on all files!")
     for f1 in files:
         Utils.strings(f1, DIRECTORY)
         i += 1
@@ -182,7 +191,7 @@ if STRINGS:
         if os.path.isdir(REGEX_DIR_NAME):
             print("[*] Output regexs finding directory is set to: " + REGEX_DIR_NAME)
             print(f"[*] dumping contents of {DIRECTORY}")
-            Utils.inspec(DIRECTORY, REGEX_DIR_NAME)
+            Utils.inspec(DIRECTORY, REGEX_DIR_NAME, DENY_LIST_CUSTOM, DENY_ON)
         else:
             print("[!] The selected output directory does not exist!")
             sys.exit(1)

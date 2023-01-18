@@ -21,5 +21,5 @@ stripe_api_key: (?i)stripe(.{0,20})?[sr]k_live_[0-9a-zA-Z]{24}
 square_access_token: sq0atp\-[0-9A-Za-z\-_]{22}|EAAAE[a-zA-Z0-9\-_]{59}
 square_oauth_secret: sq0csp\-[0-9A-Za-z\-_]{43}
 # bug aws_cognito_pool: us-east-1|us-east-2|us-west-1|us-west-2|sa-east-1):[0-9A-Za-z]{8}-[0-9A-Za-z]{4}
-httpS_url: https?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+
-HTTP_URL: http?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+
+HTTPS: https?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+
+HTTP: http?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+
